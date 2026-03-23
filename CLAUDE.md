@@ -150,19 +150,32 @@ Pilot_Reports/{Industry}/{Ticker}_{ChineseName}.md
 ### Tools
 | Tool | Command | Purpose |
 |---|---|---|
-| Audit | `python .agent/workflows/audit_batch.py <batch> -v` | Discover & verify quality |
-| Enrich | Edit DATA in `.agent/workflows/fix_batch.py`, then run | Apply enrichment |
+| Audit | `python .agent/workflows/audit_batch.py <batch> -v` | Single batch quality check |
+| Audit All | `python .agent/workflows/audit_batch.py --all -v` | Regression check on all completed batches |
+| Enrich | Edit DATA in `.agent/workflows/fix_batch.py`, then run | Apply enrichment to files |
 
 ### Process
-1. **Audit** — identify tickers needing work
-2. **Research** — deep web search per ticker (法說會, 年報, MOPS, IR pages)
-3. **Prepare** — format into `fix_batch.py` DATA dict
-4. **Execute** — run script
-5. **Verify** — re-audit, confirm all CLEAN
-6. **Mark done** — update `task.md`
+```
+1. Audit       → python .agent/workflows/audit_batch.py <batch> -v
+2. Research    → web search per ticker (法說會, 年報, MOPS, IR pages, company website)
+3. Verify Name → CRITICAL: confirm filename company matches researched company
+4. Prepare     → inject research into fix_batch.py DATA dict (CLEAN dict first!)
+5. Execute     → python .agent/workflows/fix_batch.py
+6. Verify      → re-audit, confirm all CLEAN
+7. Mark done   → update task.md with [x]
+8. Commit      → git checkpoint after each batch
+```
+
+### Research Queries (per ticker)
+- `[Ticker] 法說會` — investor conference transcripts
+- `[Ticker] 年報 主要客戶` — annual report customer disclosures
+- `[Ticker] 供應商 供應鏈` — supply chain information
+- `[Company Name] supplier customer` — English-language sources
+- Company IR pages, MOPS filings, industry reports
 
 ### Execution Rules
-- Process in groups of 10 tickers per cycle
-- One audit + three loops of 2 commands (inject + run) per 30-ticker batch
+- **CLEAN the DATA dict before each new batch** — old entries cause regressions
+- Process in groups of 10 tickers per research cycle
 - All data injection via the DATA dict in `fix_batch.py` — no temporary scripts
 - Mark `task.md` immediately after batch completion
+- Git commit after each batch is verified CLEAN
