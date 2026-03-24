@@ -110,6 +110,8 @@ def fetch_financials(ticker):
                     df_annual = df_annual[valid_cols]
                 else:
                     df_annual = df_annual.dropna(axis=1, how="all")
+                # Sort newest-first, take latest 3 years
+                df_annual = df_annual[sorted(df_annual.columns, reverse=True)]
                 non_pct = [r for r in df_annual.index if "%" not in r]
                 df_annual.loc[non_pct] = df_annual.loc[non_pct] / 1_000_000
                 df_annual = df_annual.iloc[:, :3]
@@ -124,6 +126,8 @@ def fetch_financials(ticker):
                     df_quarterly = df_quarterly[valid_cols]
                 else:
                     df_quarterly = df_quarterly.dropna(axis=1, how="all")
+                # Sort newest-first, take latest 4 quarters
+                df_quarterly = df_quarterly[sorted(df_quarterly.columns, reverse=True)]
                 non_pct = [r for r in df_quarterly.index if "%" not in r]
                 df_quarterly.loc[non_pct] = df_quarterly.loc[non_pct] / 1_000_000
                 df_quarterly = df_quarterly.iloc[:, :4]
