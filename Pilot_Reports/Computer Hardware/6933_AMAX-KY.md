@@ -49,6 +49,7 @@ AMAX 不僅負責高密度伺服器的硬體組裝設計，更提供從「空冷
 | Gross Profit            |       739.90 |       990.22 |       836.23 |
 | Gross Margin (%)        |        13.47 |        16.29 |        12.39 |
 | Selling & Marketing Exp |       266.94 |       288.07 |       245.60 |
+| R&D Exp                 |       130.16 |       131.79 |       123.33 |
 | General & Admin Exp     |       209.37 |       242.52 |       187.16 |
 | Operating Income        |       133.42 |       327.84 |       280.14 |
 | Operating Margin (%)    |         2.43 |         5.39 |         4.15 |
@@ -66,6 +67,7 @@ AMAX 不僅負責高密度伺服器的硬體組裝設計，更提供從「空冷
 | Gross Profit            |       156.99 |       316.33 |       149.03 |       222.04 |
 | Gross Margin (%)        |        11.34 |        16.66 |         7.62 |        13.42 |
 | Selling & Marketing Exp |        52.80 |        69.77 |        61.57 |        65.60 |
+| R&D Exp                 |        38.65 |        36.18 |        34.61 |        33.19 |
 | General & Admin Exp     |        45.08 |        66.52 |        48.06 |        50.73 |
 | Operating Income        |        20.46 |       143.86 |         4.78 |        72.52 |
 | Operating Margin (%)    |         1.48 |         7.58 |         0.24 |         4.38 |

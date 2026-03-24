@@ -31,6 +31,7 @@
 | Gross Profit            |       384.79 |       113.49 |       154.55 |
 | Gross Margin (%)        |        35.65 |        15.82 |        23.33 |
 | Selling & Marketing Exp |         5.35 |         5.92 |         4.21 |
+| R&D Exp                 |        51.35 |        61.50 |        45.45 |
 | General & Admin Exp     |       143.21 |       147.40 |       132.32 |
 | Operating Income        |       184.88 |      -101.33 |       -27.44 |
 | Operating Margin (%)    |        17.13 |       -14.13 |        -4.14 |
@@ -48,6 +49,7 @@
 | Gross Profit            |       129.05 |        79.72 |        82.23 |        93.78 |
 | Gross Margin (%)        |        40.52 |        31.67 |        34.45 |        34.68 |
 | Selling & Marketing Exp |         1.29 |         1.31 |         1.21 |         1.53 |
+| R&D Exp                 |        10.89 |        12.60 |        14.66 |        13.20 |
 | General & Admin Exp     |        41.18 |        31.96 |        34.01 |        36.06 |
 | Operating Income        |        75.70 |        33.84 |        32.34 |        42.99 |
 | Operating Margin (%)    |        23.77 |        13.44 |        13.55 |        15.90 |
