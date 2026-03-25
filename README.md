@@ -167,19 +167,42 @@ python scripts/build_themes.py --list        # List available themes
 
 Generates [themes/](themes/) — supply chain maps for key investment themes. Each page shows companies grouped by upstream/midstream/downstream role. See [themes/README.md](themes/README.md) for the full index.
 
-## Using with Claude Code
+## Token Usage & Cost Guide
 
-This project includes [Claude Code](https://claude.ai/claude-code) skill definitions for interactive use:
+Tools fall into two categories: **Python scripts** (free, run locally) and **Claude Code skills** (consume API tokens for AI research).
 
-| Command | Description |
-|---|---|
-| `/add-ticker 2330 台積電` | Generate report + fetch financials + research & enrich |
-| `/update-financials 2330` | Refresh financial tables from yfinance |
-| `/update-valuation 2330` | Refresh valuation multiples only (fast) |
-| `/update-enrichment 2330` | Re-research and update business content |
-| `/discover 液冷散熱` | Reverse search: buzzword → companies + web research fallback |
+### Free — Python Scripts (No Tokens)
 
-All commands support scope: single ticker, multiple tickers, `--batch N`, `--sector Name`, or all.
+These run 100% locally with Python + yfinance. No AI, no API cost.
+
+| Script | Command | What it does |
+|---|---|---|
+| Update Financials | `python scripts/update_financials.py [scope]` | Refresh financial tables from yfinance |
+| Update Valuation | `python scripts/update_valuation.py [scope]` | Refresh P/E, P/B, EV/EBITDA only (fast) |
+| Update Enrichment | `python scripts/update_enrichment.py --data <json> [scope]` | Apply pre-prepared enrichment data |
+| Audit | `python scripts/audit_batch.py <batch> -v` | Quality check reports |
+| Discover (search) | `python scripts/discover.py "<buzzword>"` | Scan reports for keyword matches |
+| Build Themes | `python scripts/build_themes.py` | Generate thematic supply chain pages |
+| Build Network | `python scripts/build_network.py` | Generate interactive D3.js graph |
+| Build Wikilink Index | `python scripts/build_wikilink_index.py` | Rebuild WIKILINKS.md |
+
+### Consumes Tokens — Claude Code Skills (Requires AI)
+
+These use Claude AI for web research, content generation, and intelligent enrichment. They require [Claude Code](https://claude.ai/claude-code) and consume API tokens.
+
+| Slash Command | Token Usage | What it does |
+|---|---|---|
+| `/add-ticker 2330 台積電` | Medium | Generate .md + fetch financials + **AI researches** business desc, supply chain, customers |
+| `/update-enrichment 2330` | Medium | **AI re-researches** and rewrites business content (preserves financials) |
+| `/discover 液冷散熱` | Low-High | Scans database (free) → if no results, **AI researches** online and enriches reports |
+
+**Token cost drivers:**
+- `/add-ticker`: ~1 web search + content generation per ticker
+- `/update-enrichment`: ~3-5 web searches + content synthesis per ticker
+- `/discover` with results: **zero tokens** (Python scan only)
+- `/discover` without results: varies by research depth (web searches + file edits)
+
+**Tip:** For bulk operations, use Python scripts directly. Use slash commands for individual tickers or when AI research is needed.
 
 ## Wikilink Graph
 
