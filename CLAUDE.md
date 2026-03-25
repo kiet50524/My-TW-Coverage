@@ -151,6 +151,7 @@ Pilot_Reports/{Industry}/{Ticker}_{ChineseName}.md
 | Update Enrichment | `python scripts/update_enrichment.py --data <json> [scope]` | Update desc/supply chain/customers |
 | Audit | `python scripts/audit_batch.py <batch> -v` | Quality check (single batch) |
 | Audit All | `python scripts/audit_batch.py --all -v` | Quality check (all completed batches) |
+| Wikilink Index | `python scripts/build_wikilink_index.py` | Rebuild WIKILINKS.md from all reports |
 
 ### Scope Syntax (shared across all scripts)
 ```
