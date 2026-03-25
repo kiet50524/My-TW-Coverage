@@ -53,7 +53,7 @@ Each report follows a consistent structure:
 ### 主要客戶
 - [[Apple]], [[NVIDIA]], [[AMD]], [[Qualcomm]]...
 ### 主要供應商
-- [[ASML]], [[Tokyo Electron]], [[信越化學]]...
+- [[ASML]], [[Tokyo Electron]], [[Shin-Etsu]]...
 
 ## 財務概況
 [Annual (3yr) and Quarterly (4Q) financial tables]
@@ -107,6 +107,14 @@ python scripts/audit_batch.py --all -v    # All batches
 
 The audit checks: minimum 8 wikilinks, no generic terms in brackets, no placeholders, no English text, metadata completeness, and section depth.
 
+### Rebuild Wikilink Index
+
+```bash
+python scripts/build_wikilink_index.py
+```
+
+Regenerates [WIKILINKS.md](WIKILINKS.md) — a browsable index of all 4,900+ wikilinks categorized by type (Technologies, Materials, Applications, Companies). Run after any enrichment update.
+
 ## Using with Claude Code
 
 This project includes [Claude Code](https://claude.ai/claude-code) skill definitions for interactive use:
@@ -121,7 +129,9 @@ All commands support scope: single ticker, multiple tickers, `--batch N`, `--sec
 
 ## Wikilink Graph
 
-The database contains **4,941 unique wikilinks** across three categories:
+Browse the full index: **[WIKILINKS.md](WIKILINKS.md)**
+
+The database contains **4,900+ unique wikilinks** across three categories:
 
 | Category | Examples | Purpose |
 |---|---|---|
@@ -145,6 +155,7 @@ The database contains **4,941 unique wikilinks** across three categories:
 
 ```
 ├── CLAUDE.md                  # Project rules and quality standards
+├── WIKILINKS.md               # Browsable wikilink index (auto-generated)
 ├── task.md                    # Batch definitions and progress tracking
 ├── README.md
 ├── scripts/
@@ -153,6 +164,7 @@ The database contains **4,941 unique wikilinks** across three categories:
 │   ├── update_financials.py   # Refresh financial tables from yfinance
 │   ├── update_enrichment.py   # Update business descriptions from JSON
 │   ├── audit_batch.py         # Quality auditing
+│   ├── build_wikilink_index.py # Rebuild WIKILINKS.md index
 │   └── generators/            # Historical base report generators
 ├── Pilot_Reports/             # 1,735 ticker reports across 99 sectors
 │   ├── Semiconductors/
@@ -189,6 +201,17 @@ Current audit score: **1,733/1,733 (100%)** pass all quality checks.
 - Business descriptions reflect research as of the enrichment date — they don't auto-update
 - Wikilinks are manually curated — new technologies or companies need manual addition
 - Content is in Traditional Chinese — English speakers will need translation
+
+## Wikilink Naming Convention
+
+| Category | Canonical form | Examples |
+|---|---|---|
+| Taiwan companies | Chinese | `[[台積電]]`, `[[鴻海]]`, `[[聯發科]]` |
+| Foreign companies | English | `[[NVIDIA]]`, `[[Samsung]]`, `[[Micron]]` |
+| Materials/substrates | Chinese | `[[碳化矽]]`, `[[氮化鎵]]`, `[[電動車]]` |
+| Industry acronyms | Acronym | `[[PCB]]`, `[[CPO]]`, `[[HBM]]`, `[[CoWoS]]` |
+
+Wikilink normalization is built into the enrichment pipeline — aliases are automatically merged to canonical form on every write.
 
 ## Contributing
 
